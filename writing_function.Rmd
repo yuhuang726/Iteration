@@ -1,0 +1,66 @@
+---
+title: "Writing Function"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+
+library(p8105.datasets)
+library(rvest)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.color = "viridis",
+  ggplots.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_color_viridis_d
+scale_fill_continuous = scale_fill_viridis_d
+
+```
+
+## Do something simple
+
+```{r}
+x_vec = rnorm(30, mean = 5, sd = 3)
+
+(x_vec - mean(x_vec)) / sd(x_vec)
+```
+
+I want a function to compute z-score
+
+```{r}
+z_score = function(x) {
+  
+  if(!is.numeric(x)) {
+    stop("Imput must be numeric")
+  }
+  
+  if(length(x) < 3) {
+    stop("Imput must have at least three numbers")
+  }
+  
+  z = (x - mean(x)) / sd(x)
+  
+  return(z)
+}
+
+z_score(x_vec)
+```
+
+Try my function on some other things. This should give errors.
+
+```{r, error = TRUE}
+z_score(3)
+z_score("my name is jeff")
+z_score(c(TRUE, TRUE, FALSE, TRUE))
+```
+
