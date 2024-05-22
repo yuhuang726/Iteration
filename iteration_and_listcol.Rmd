@@ -129,5 +129,17 @@ output = map(list_norm, median)
 output = map(list_norm, IQR)
 ```
 
+```{r}
+output = map_dbl(list_norm, median)
+```
 
+```{r}
+output = map_df(list_norm, mean_and_sd, .id = "input")
+```
+
+.id = "input": put the a, b, c, d name into a column named input.
+
+```{r}
+
+```
 

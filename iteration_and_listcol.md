@@ -30,8 +30,8 @@ l
     ## [2,]    2    4    6    8
     ## 
     ## $summary
-    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ## -2.3282 -0.5540  0.1047  0.0982  0.7493  2.9133
+    ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+    ## -1.83342 -0.77139  0.05164  0.02144  0.71340  2.52358
 
 ``` r
 l$vec_numeric
@@ -106,16 +106,16 @@ mean_and_sd(list_norm[[1]])
     ## # A tibble: 1 × 2
     ##    mean    sd
     ##   <dbl> <dbl>
-    ## 1  2.87 0.904
+    ## 1  2.77  1.19
 
 ``` r
 mean_and_sd(list_norm[[2]])
 ```
 
     ## # A tibble: 1 × 2
-    ##     mean    sd
-    ##    <dbl> <dbl>
-    ## 1 -0.195  4.51
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  1.09  4.75
 
 ``` r
 mean_and_sd(list_norm[[3]])
@@ -124,7 +124,7 @@ mean_and_sd(list_norm[[3]])
     ## # A tibble: 1 × 2
     ##    mean    sd
     ##   <dbl> <dbl>
-    ## 1  10.0 0.184
+    ## 1  9.96 0.199
 
 ``` r
 mean_and_sd(list_norm[[4]])
@@ -133,7 +133,7 @@ mean_and_sd(list_norm[[4]])
     ## # A tibble: 1 × 2
     ##    mean    sd
     ##   <dbl> <dbl>
-    ## 1 -3.05 0.877
+    ## 1 -3.12 0.852
 
 Let’s use a for loop:
 
@@ -159,3 +159,13 @@ what if you want a different function?
 output = map(list_norm, median)
 output = map(list_norm, IQR)
 ```
+
+``` r
+output = map_dbl(list_norm, median)
+```
+
+``` r
+output = map_df(list_norm, mean_and_sd, .id = "input")
+```
+
+.id = “input”: put the a, b, c, d name into a column named input.
