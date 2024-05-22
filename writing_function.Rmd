@@ -10,6 +10,8 @@ library(p8105.datasets)
 library(rvest)
 
 library(stringr)
+library(tibble)
+library(dplyr)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -183,11 +185,11 @@ read_page_reviews = function(url) {
 
   html = read_html(url)
 
-  review_titles %>% 
-    html %>%
-    html_nodes(xpath = "//a[@data-hook='review-title']/span") %>% 
-    html_text(trim = TRUE)  %>%  
-    review_titles[review_titles != "" ]
+review_titles <- html %>%
+  html_nodes(xpath = "//a[@data-hook='review-title']/span") %>% 
+  html_text(trim = TRUE)
+
+review_titles <- review_titles[review_titles != "" ]
 
   review_stars =	
   	html %>%	
@@ -238,5 +240,22 @@ all_reviews =
     read_page_reviews(dynamite_urls[5]),
 )
 ```
+
+
+## Mean scoping example
+
+```{r}
+f = function(x) {
+  z = x + y
+  z
+}
+
+x = 1
+y = 2
+
+f(x = y)
+```
+
+
 
 
