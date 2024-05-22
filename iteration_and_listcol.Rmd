@@ -139,7 +139,51 @@ output = map_df(list_norm, mean_and_sd, .id = "input")
 
 .id = "input": put the a, b, c, d name into a column named input.
 
-```{r}
 
+## List columns
+
+```{r}
+listcol_df = 
+  tibble(
+    name = c ("a", "b", "c", "d"),
+    samp = list_norm
+  )
 ```
+
+```{r}
+listcol_df %>% pull(name)
+listcol_df %>% pull(samp)
+  
+  listcol_df %>% 
+    filter(name == "a")
+```
+
+Let's try some operations.
+
+```{r}
+mean_and_sd(listcol_df$samp[[1]])
+mean_and_sd(listcol_df$samp[[2]])
+```
+
+$samp: pull out the column samp
+
+Can I just ... map?
+
+```{r}
+map(listcol_df$samp, mean_and_sd)
+```
+
+implement mean_and_sd function on the samp column in listcol_df.
+
+
+So ... can I add a list column??
+
+```{r}
+listcol_df =
+  listcol_df %>% 
+   mutate(
+     summary = map(samp, mean_and_sd),
+     medians = map_dbl(samp, median))
+```
+
 
